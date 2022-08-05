@@ -70,18 +70,22 @@ const LinkedList = () => {
   }
 
   const find = (value) => {
+    let indexCounter = 0;
     let pointer = head;
     while (pointer !== null) {
-      if (pointer.value === value) return pointer;
+      if (pointer.value === value) return indexCounter;
+
       pointer = pointer.nextNode;
+      indexCounter++;
     }
+    return -1;
   }
 
   const toString = () => {
     let pointer = head;
     let string = "";
     while (pointer !== null) {
-      string += `${pointer.value} -> `;
+      string += `( ${pointer.value} ) -> `;
       pointer = pointer.nextNode;
     }
     return `${string}null`;
