@@ -11,7 +11,7 @@ list.insertAt(3, 1);
 list.pop();          // removes 7 from list
 list.removeAt(4);    // removes 5 from list
 
-console.log("Size should be 5, actual: ", list.size);
+console.log("Size should be 5, actual: ", list.size());
 console.log("Head value should be 8, actual: ", list.head.value);
 console.log("Node value at 1st index should be 3, actual: ", list.at(1).value);
 console.log("Node with value 10 is found at index 3, actual: ", list.find(10));
