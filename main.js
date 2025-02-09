@@ -1,6 +1,6 @@
-import { LinkedList } from "./lib/linked-list.js";
+import LinkedList from "./lib/linked-list.js";
 
-const list = LinkedList();
+const list = new LinkedList();
 list.append(5);
 list.append(6);
 list.append(7)
