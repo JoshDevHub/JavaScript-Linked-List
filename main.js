@@ -15,6 +15,7 @@ console.log("Size should be 5, actual: ", list.size());
 console.log("Head value should be 8, actual: ", list.head.value);
 console.log("Node value at 1st index should be 3, actual: ", list.at(1).value);
 console.log("Node with value 10 is found at index 3, actual: ", list.find(10));
+console.log("`contains()` returns false for value 7, actual: ", list.contains(7));
 console.log("Tail value should be 6, actual: ", list.tail().value);
 
 console.log(
