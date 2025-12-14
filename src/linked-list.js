@@ -19,17 +19,16 @@ export default class LinkedList {
   }
 
   tail() {
-    const tailNode = this.#genNodes().find((node) => node.isTail());
-    return tailNode?.value ?? null;
+    return this.#tailNode()?.value ?? null;
   }
 
   append(value) {
-    if (!this.head) {
-      this.head = new Node(value);
+    if (!this.#head) {
+      this.#head = new Node(value);
       return;
     }
 
-    this.tail().nextNode = new Node(value);
+    this.#tailNode().nextNode = new Node(value);
   }
 
   prepend(value) {
@@ -89,6 +88,10 @@ export default class LinkedList {
     if (!nodeBeforeIndex?.nextNode) return;
 
     nodeBeforeIndex.nextNode = nodeBeforeIndex.nextNode.nextNode;
+  }
+
+  #tailNode() {
+    return this.#genNodes().find((node) => node.isTail());
   }
 
   *#genNodes() {
