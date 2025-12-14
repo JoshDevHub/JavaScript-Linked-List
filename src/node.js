@@ -8,6 +8,10 @@ export default class Node {
     return this.value.toString();
   }
 
+  isEqual(other) {
+    return other instanceof Node && this.value === other.value;
+  }
+
   isTail() {
     return this.nextNode === null;
   }
