@@ -15,9 +15,12 @@ export default class LinkedList {
   }
 
   head() {
-    if (!this.#head) return null;
+    return this.#head?.value ?? null;
+  }
 
-    return this.#head.value;
+  tail() {
+    const tailNode = this.#genNodes().find((node) => node.isTail());
+    return tailNode?.value ?? null;
   }
 
   append(value) {
@@ -39,10 +42,6 @@ export default class LinkedList {
 
   size() {
     return this.#genNodes().reduce((counter) => counter + 1, 0);
-  }
-
-  tail() {
-    return this.#genNodes().find((node) => node.isTail());
   }
 
   pop() {
@@ -93,7 +92,7 @@ export default class LinkedList {
   }
 
   *#genNodes() {
-    let currentNode = this.head;
+    let currentNode = this.#head;
     while (currentNode) {
       yield currentNode;
       currentNode = currentNode.nextNode;
