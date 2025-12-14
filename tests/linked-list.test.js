@@ -127,15 +127,10 @@ describe("LinkedList", () => {
   describe("at()", () => {
     const list = LinkedList.fromValues(5, 10, 15, 20);
 
-    test("returns `5` for the given index 0", () => {
+    test("returns the element at the given index", () => {
       expect(list.at(0)).toBe(5);
-    })
-
-    test("returns `15` for the given index 2", () => {
+      expect(list.at(1)).toBe(10);
       expect(list.at(2)).toBe(15);
-    })
-
-    test("returns `20` for the given index 3", () => {
       expect(list.at(3)).toBe(20);
     })
 
@@ -145,6 +140,21 @@ describe("LinkedList", () => {
 
     test("returns null for an index above the length of the list", () => {
       expect(list.at(4)).toBeNull();
+    })
+  })
+
+  describe("find()", () => {
+    const list = LinkedList.fromValues(5, 10, 15, 20);
+
+    test("returns the index of the element if it's in the list", () => {
+      expect(list.find(5)).toBe(0);
+      expect(list.find(10)).toBe(1);
+      expect(list.find(15)).toBe(2);
+      expect(list.find(20)).toBe(3);
+    })
+
+    test("returns null for an element that's not in the list", () => {
+      expect(list.find(100)).toBeNull();
     })
   })
 })

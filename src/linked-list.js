@@ -58,7 +58,15 @@ export default class LinkedList {
   }
 
   find(value) {
-    return this.#genNodes().toArray().findIndex((node) => node.value === value);
+    // return this.#genNodes().toArray().findIndex((node) => node.value === value);
+    let foundIdx = null;
+    this.#findNode((node, i) => {
+      if (node.value === value) {
+        foundIdx = i;
+        return true;
+      }
+    })
+    return foundIdx;
   }
 
   toString() {
