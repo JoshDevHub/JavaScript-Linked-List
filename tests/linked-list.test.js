@@ -104,4 +104,23 @@ describe("LinkedList", () => {
       expect(list.size()).toBe(1);
     })
   })
+
+  describe("size()", () => {
+    test("returns 0 for an empty list", () => {
+      const list = new LinkedList();
+      expect(list.size()).toBe(0);
+    })
+
+    test("returns 1 for a list with one item", () => {
+      const list = new LinkedList();
+      list.append(5);
+
+      expect(list.size()).toBe(1);
+    })
+
+    test("returns 5 for a list with 5 items", () => {
+      const list = LinkedList.fromValues(1, 2, 3, 4, 5);
+      expect(list.size()).toBe(5);
+    })
+  })
 })

@@ -35,12 +35,12 @@ export default class LinkedList {
     this.#head = new Node(value, this.#head);
   }
 
-  at(index) {
-    return this.#genNodes().find((_, i) => index === i);
-  }
-
   size() {
     return this.#genNodes().reduce((counter) => counter + 1, 0);
+  }
+
+  at(index) {
+    return this.#genNodes().find((_, i) => index === i);
   }
 
   pop() {
