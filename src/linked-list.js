@@ -1,8 +1,23 @@
 import Node from "./node.js";
 
 export default class LinkedList {
+  #head;
+
+  static fromValues(...values) {
+    const list = new LinkedList();
+    values.reverse().forEach((value) => list.prepend(value));
+
+    return list;
+  }
+
   constructor() {
-    this.head = null;
+    this.#head = null;
+  }
+
+  head() {
+    if (!this.#head) return null;
+
+    return this.#head.value;
   }
 
   append(value) {
@@ -15,7 +30,7 @@ export default class LinkedList {
   }
 
   prepend(value) {
-    this.head = new Node(value, this.head);
+    this.#head = new Node(value, this.#head);
   }
 
   at(index) {
