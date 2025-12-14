@@ -123,4 +123,28 @@ describe("LinkedList", () => {
       expect(list.size()).toBe(5);
     })
   })
+
+  describe("at()", () => {
+    const list = LinkedList.fromValues(5, 10, 15, 20);
+
+    test("returns `5` for the given index 0", () => {
+      expect(list.at(0)).toBe(5);
+    })
+
+    test("returns `15` for the given index 2", () => {
+      expect(list.at(2)).toBe(15);
+    })
+
+    test("returns `20` for the given index 3", () => {
+      expect(list.at(3)).toBe(20);
+    })
+
+    test("returns null for an index below 0", () => {
+      expect(list.at(-1)).toBeNull();
+    })
+
+    test("returns null for an index above the length of the list", () => {
+      expect(list.at(4)).toBeNull();
+    })
+  })
 })

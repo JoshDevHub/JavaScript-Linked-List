@@ -15,11 +15,11 @@ export default class LinkedList {
   }
 
   head() {
-    return this.#head?.value ?? null;
+    return this.at(0);
   }
 
   tail() {
-    return this.#tailNode()?.value ?? null;
+    return this.#tailNode().value
   }
 
   append(value) {
@@ -40,7 +40,7 @@ export default class LinkedList {
   }
 
   at(index) {
-    return this.#genNodes().find((_, i) => index === i);
+    return this.#findNode((_, i) => index === i).value
   }
 
   pop() {
@@ -89,7 +89,11 @@ export default class LinkedList {
   }
 
   #tailNode() {
-    return this.#genNodes().find((node) => node.isTail());
+    return this.#findNode((node) => node.isTail());
+  }
+
+  #findNode(callback) {
+    return this.#genNodes().find(callback) ?? { value: null }
   }
 
   *#genNodes() {
