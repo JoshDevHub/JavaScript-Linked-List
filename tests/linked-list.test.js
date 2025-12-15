@@ -1,4 +1,4 @@
-import { describe, test, expect } from "@jest/globals";
+import { describe, test, expect, beforeEach } from "@jest/globals";
 import LinkedList from "../src/linked-list";
 
 describe("LinkedList", () => {
