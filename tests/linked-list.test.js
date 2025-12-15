@@ -143,6 +143,82 @@ describe("LinkedList", () => {
     })
   })
 
+  describe("pop()", () => {
+    describe("with a multi-element list", () => {
+      let list = null;
+      beforeEach(() => list = LinkedList.fromValues(1, 2, 3))
+
+      test("returns the first value from a list with items in it", () => {
+        expect(list.pop()).toBe(1);
+      })
+
+      test("changes the head node from the 0th element to the 1st element", () => {
+        expect(list.head()).toBe(1);
+
+        list.pop();
+
+        expect(list.head()).toBe(2);
+      })
+
+      test("decreases the size of the list by one", () => {
+        expect(list.size()).toBe(3);
+
+        list.pop();
+
+        expect(list.size()).toBe(2);
+      })
+    })
+
+    describe("with one element in the list", () => {
+      let list = null;
+      beforeEach(() => list = LinkedList.fromValues(1))
+
+      test("returns the value in the list", () => {
+        expect(list.pop()).toBe(1);
+      })
+
+      test("makes the head node null", () => {
+        expect(list.head()).toBe(1);
+
+        list.pop();
+
+        expect(list.head()).toBeNull();
+      })
+
+      test("decreases the size of the list by one", () => {
+        expect(list.size()).toBe(1);
+
+        list.pop();
+
+        expect(list.size()).toBe(0);
+      })
+    })
+
+    describe("with an empty list", () => {
+      const list = new LinkedList();
+
+      test("returns null", () => {
+        expect(list.pop()).toBeNull();
+      })
+
+      test("it does not change the size of the list", () => {
+        expect(list.size()).toBe(0);
+
+        list.pop();
+
+        expect(list.size()).toBe(0);
+      })
+
+      test("it does not change the head node", () => {
+        expect(list.head()).toBeNull();
+
+        list.pop();
+
+        expect(list.head()).toBeNull();
+      })
+    })
+  })
+
   describe("find()", () => {
     const list = LinkedList.fromValues(5, 10, 15, 20);
 

@@ -44,13 +44,11 @@ export default class LinkedList {
   }
 
   pop() {
-    if (!this.head || this.head.isTail()) {
-      this.head = null;
-      return;
-    }
+    if (!this.#head) return null;
 
-    const preTailNode = this.#genNodes().find((node) => node.nextNode.isTail());
-    preTailNode.nextNode = null;
+    const out = this.#head.value;
+    this.#head = this.#head.nextNode;
+    return out;
   }
 
   contains(value) {
@@ -58,7 +56,6 @@ export default class LinkedList {
   }
 
   find(value) {
-    // return this.#genNodes().toArray().findIndex((node) => node.value === value);
     let foundIdx = null;
     this.#findNode((node, i) => {
       if (node.value === value) {
