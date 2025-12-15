@@ -67,8 +67,8 @@ export default class LinkedList {
   }
 
   toString() {
-    const listString = this.#genNodes().map((node) => `( ${node} ) -> `);
-    return `${listString.join('')}null`
+    const listString = this.#genNodes().reduce((str, node) => `${str}( ${node} ) -> `, "");
+    return `${listString}null`
   }
 
   insertAt(value, index) {

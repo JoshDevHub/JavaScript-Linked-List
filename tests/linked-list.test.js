@@ -248,4 +248,16 @@ describe("LinkedList", () => {
       expect(list.find(100)).toBeNull();
     })
   })
+
+  describe("toString()", () => {
+    test("returns 'null' with an empty list", () => {
+      const list = new LinkedList();
+      expect(list.toString()).toBe("null");
+    })
+
+    test("returns the valid string representation of the list with multiple items", () => {
+      const list = LinkedList.fromValues(1, 2, 3, 4);
+      expect(list.toString()).toBe("( 1 ) -> ( 2 ) -> ( 3 ) -> ( 4 ) -> null");
+    })
+  })
 })
