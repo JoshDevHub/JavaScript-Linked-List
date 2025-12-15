@@ -72,13 +72,13 @@ export default class LinkedList {
   }
 
   insertAt(value, index) {
-    if (index === 0) {
-      prepend(value);
-      return;
+    if (index < 0 || index > this.size()) {
+      throw new RangeError("Index value is outside the bounds of this object");
     }
-    const nodeBeforeIndex = this.at(index - 1);
-    if (!nodeBeforeIndex) return;
 
+    if (index === 0) return this.prepend(value);
+
+    const nodeBeforeIndex = this.#findNode((_, i) => i === index - 1);
     nodeBeforeIndex.nextNode = new Node(value, nodeBeforeIndex.nextNode);
   }
 

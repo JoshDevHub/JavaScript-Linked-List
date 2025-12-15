@@ -260,4 +260,92 @@ describe("LinkedList", () => {
       expect(list.toString()).toBe("( 1 ) -> ( 2 ) -> ( 3 ) -> ( 4 ) -> null");
     })
   })
+
+  describe("insertAt()", () => {
+    describe("with an index that isn't in the list", () => {
+      test("raises a RangeError", () => {
+        const list = new LinkedList();
+
+        expect(() => list.insertAt(100, 1)).toThrow(RangeError);
+        expect(() => list.insertAt(100, -1)).toThrow(RangeError);
+      })
+    })
+
+    describe("to the index at the beginning of the list", () => {
+      test("it inserts the item", () => {
+        const list = new LinkedList();
+        expect(list.size()).toBe(0);
+
+        list.insertAt(100, 0);
+
+        expect(list.head()).toBe(100);
+        expect(list.tail()).toBe(100);
+        expect(list.size()).toBe(1);
+      })
+    })
+
+    describe("to the index in the middle of the list", () => {
+      let list = {}
+      beforeEach(() => list = LinkedList.fromValues(1, 2, 3, 4));
+
+      const writeIndex = 2;
+      const value = 100
+
+      test("increases the size of the list", () => {
+        expect(list.size()).toBe(4);
+
+        list.insertAt(value, writeIndex);
+
+        expect(list.size()).toBe(5);
+      })
+
+      test("writes the given value to the given index", () => {
+        expect(list.at(2)).not.toBe(value);
+
+        list.insertAt(value, writeIndex);
+
+        expect(list.at(2)).toBe(value);
+      })
+
+      test("shifts the value at the previous index back", () => {
+        expect(list.at(3)).not.toBe(3);
+
+        list.insertAt(value, writeIndex);
+
+        expect(list.at(3)).toBe(3);
+      })
+    })
+
+    describe("to the index at the end of the list", () => {
+      let list = {}
+      beforeEach(() => list = LinkedList.fromValues(1, 2, 3, 4));
+
+      const writeIndex = 4;
+      const value = 100
+
+      test("increases the size of the list", () => {
+        expect(list.size()).toBe(4);
+
+        list.insertAt(value, writeIndex);
+
+        expect(list.size()).toBe(5);
+      })
+
+      test("writes the given value to the given index", () => {
+        expect(list.at(4)).not.toBe(value);
+
+        list.insertAt(value, writeIndex);
+
+        expect(list.at(4)).toBe(value);
+      })
+
+      test("the new value is now the tail node", () => {
+        expect(list.tail()).not.toBe(value);
+
+        list.insertAt(value, writeIndex);
+
+        expect(list.tail()).toBe(value);
+      })
+    })
+  })
 })
