@@ -134,12 +134,12 @@ describe("LinkedList", () => {
       expect(list.at(3)).toBe(20);
     })
 
-    test("returns null for an index below 0", () => {
-      expect(list.at(-1)).toBeNull();
+    test("returns undefined for an index below 0", () => {
+      expect(list.at(-1)).toBeUndefined();
     })
 
-    test("returns null for an index above the length of the list", () => {
-      expect(list.at(4)).toBeNull();
+    test("returns undefined for an index above the length of the list", () => {
+      expect(list.at(4)).toBeUndefined();
     })
   })
 
@@ -197,8 +197,8 @@ describe("LinkedList", () => {
     describe("with an empty list", () => {
       const list = new LinkedList();
 
-      test("returns null", () => {
-        expect(list.pop()).toBeNull();
+      test("returns undefined", () => {
+        expect(list.pop()).toBeUndefined();
       })
 
       test("it does not change the size of the list", () => {
@@ -244,8 +244,8 @@ describe("LinkedList", () => {
       expect(list.find(20)).toBe(3);
     })
 
-    test("returns null for an element that's not in the list", () => {
-      expect(list.find(100)).toBeNull();
+    test("returns -1 for an element that's not in the list", () => {
+      expect(list.find(100)).toBe(-1);
     })
   })
 

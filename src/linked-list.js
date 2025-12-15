@@ -15,11 +15,11 @@ export default class LinkedList {
   }
 
   head() {
-    return this.at(0);
+    return this.#head?.value ?? null;
   }
 
   tail() {
-    return this.#tailNode().value
+    return this.#tailNode()?.value ?? null;
   }
 
   append(value) {
@@ -40,11 +40,11 @@ export default class LinkedList {
   }
 
   at(index) {
-    return this.#findNode((_, i) => index === i).value
+    return this.#findNode((_, i) => index === i)?.value;
   }
 
   pop() {
-    if (!this.#head) return null;
+    if (!this.#head) return;
 
     const out = this.#head.value;
     this.#head = this.#head.nextNode;
@@ -56,7 +56,7 @@ export default class LinkedList {
   }
 
   find(value) {
-    let foundIdx = null;
+    let foundIdx = -1;
     this.#findNode((node, i) => {
       if (node.value === value) {
         foundIdx = i;
@@ -98,7 +98,7 @@ export default class LinkedList {
   }
 
   #findNode(callback) {
-    return this.#genNodes().find(callback) ?? { value: null }
+    return this.#genNodes().find(callback)
   }
 
   *#genNodes() {
