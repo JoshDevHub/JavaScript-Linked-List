@@ -83,14 +83,17 @@ export default class LinkedList {
   }
 
   removeAt(index) {
+    if (index < 0 || index >= this.size()) {
+      throw new RangeError("Index value is outside the bounds of this object");
+    }
+
     if (index === 0) {
-      this.head = this.head?.nextNode;
+      this.pop();
       return;
     }
-    const nodeBeforeIndex = this.at(index - 1);
-    if (!nodeBeforeIndex?.nextNode) return;
 
-    nodeBeforeIndex.nextNode = nodeBeforeIndex.nextNode.nextNode;
+    const nodeBeforeIndex = this.#findNode((_, i) => i === index - 1);
+    nodeBeforeIndex.nextNode = nodeBeforeIndex.secondSuccessor();
   }
 
   #tailNode() {

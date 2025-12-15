@@ -348,4 +348,57 @@ describe("LinkedList", () => {
       })
     })
   })
+
+  describe("removeAt()", () => {
+    describe("removing from an index out of bounds", () => {
+      test("raises a RangeError", () => {
+        const list = new LinkedList();
+
+        expect(() => list.removeAt(0)).toThrow(RangeError);
+        expect(() => list.removeAt(-1)).toThrow(RangeError);
+      })
+    })
+
+    describe("removing at the 0th index", () => {
+      let list = {};
+      beforeEach(() => list = LinkedList.fromValues(1, 2, 3));
+
+      test("it reduces the size of the list by one", () => {
+        expect(list.size()).toBe(3)
+
+        list.removeAt(0);
+
+        expect(list.size()).toBe(2)
+      })
+
+      test("it shifts the remaining items forward in the list", () => {
+        expect(list.at(0)).toBe(1);
+
+        list.removeAt(0);
+
+        expect(list.at(0)).toBe(2);
+      })
+    })
+
+    describe("removing from the middle of the list", () => {
+      let list = {};
+      beforeEach(() => list = LinkedList.fromValues(1, 2, 3));
+
+      test("it reduces the size of the list by one", () => {
+        expect(list.size()).toBe(3)
+
+        list.removeAt(1);
+
+        expect(list.size()).toBe(2)
+      })
+
+      test("it shifts the remaining items forward in the list", () => {
+        expect(list.at(1)).toBe(2);
+
+        list.removeAt(1);
+
+        expect(list.at(1)).toBe(3);
+      })
+    })
+  })
 })

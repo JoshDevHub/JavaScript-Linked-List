@@ -15,4 +15,8 @@ export default class Node {
   isTail() {
     return this.nextNode === null;
   }
+
+  secondSuccessor() {
+    return this.nextNode?.nextNode ?? null;
+  }
 }
