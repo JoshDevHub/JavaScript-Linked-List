@@ -219,6 +219,21 @@ describe("LinkedList", () => {
     })
   })
 
+  describe("contains()", () => {
+    const list = LinkedList.fromValues(1, 2, 3);
+
+    test("returns true when the given value is in the list", () => {
+      expect(list.contains(1)).toBe(true);
+      expect(list.contains(2)).toBe(true);
+      expect(list.contains(3)).toBe(true);
+    })
+
+    test("returns false for a value that isn't in the list", () => {
+      expect(list.contains(0)).toBe(false);
+      expect(list.contains(4)).toBe(false);
+    })
+  })
+
   describe("find()", () => {
     const list = LinkedList.fromValues(5, 10, 15, 20);
 
