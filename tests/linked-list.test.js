@@ -2,6 +2,27 @@ import { describe, test, expect, beforeEach } from "@jest/globals";
 import LinkedList from "../src/linked-list";
 
 describe("LinkedList", () => {
+  describe("fromValues", () => {
+    test("returns a new list formed from the given values in order", () => {
+      const list = LinkedList.fromValues(5, 10, 15, 20);
+
+      expect(list.size()).toBe(4);
+
+      expect(list.at(0)).toBe(5);
+      expect(list.at(1)).toBe(10);
+      expect(list.at(2)).toBe(15);
+      expect(list.at(3)).toBe(20);
+      expect(list.at(4)).toBeUndefined();
+    })
+
+    test("can return an empty list", () => {
+      const emptyList = LinkedList.fromValues();
+
+      expect(emptyList.size()).toBe(0);
+      expect(emptyList.at(0)).toBeUndefined();
+    })
+  })
+
   describe("head", () => {
     test("returns `null` when there is no head node for the list", () => {
       const list = new LinkedList();
