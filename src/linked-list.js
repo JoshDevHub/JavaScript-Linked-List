@@ -15,11 +15,11 @@ export default class LinkedList {
   }
 
   head() {
-    return this.#head?.value ?? null;
+    return this.#head?.value;
   }
 
   tail() {
-    return this.#tailNode()?.value ?? null;
+    return this.#tailNode()?.value;
   }
 
   append(value) {

@@ -24,10 +24,10 @@ describe("LinkedList", () => {
   })
 
   describe("head", () => {
-    test("returns `null` when there is no head node for the list", () => {
+    test("returns `undefined` when there is no head node for the list", () => {
       const list = new LinkedList();
 
-      expect(list.head()).toBeNull();
+      expect(list.head()).toBeUndefined();
     })
 
     test("returns the head node's value when there is a head node for the list", () => {
@@ -53,9 +53,9 @@ describe("LinkedList", () => {
       expect(list.tail()).toBe(5);
     })
 
-    test("returns `null` for an empty list", () => {
+    test("returns `undefined` for an empty list", () => {
       const list = new LinkedList();
-      expect(list.tail()).toBeNull();
+      expect(list.tail()).toBeUndefined();
     })
 
     test("returns the last value in a list with many items", () => {
@@ -76,8 +76,8 @@ describe("LinkedList", () => {
 
     test("with an empty list, it adds a new item at the beginning and end of the list", () => {
       const list = new LinkedList();
-      expect(list.head()).toBeNull();
-      expect(list.tail()).toBeNull();
+      expect(list.head()).toBeUndefined();
+      expect(list.tail()).toBeUndefined();
 
       list.append(1);
 
@@ -107,8 +107,8 @@ describe("LinkedList", () => {
 
     test("with an empty list, it adds a new item to the end and beginning of the list", () => {
       const list = new LinkedList();
-      expect(list.tail()).toBeNull();
-      expect(list.tail()).toBeNull();
+      expect(list.tail()).toBeUndefined();
+      expect(list.tail()).toBeUndefined();
 
       list.prepend(1);
 
@@ -198,12 +198,12 @@ describe("LinkedList", () => {
         expect(list.pop()).toBe(1);
       })
 
-      test("makes the head node null", () => {
+      test("makes the head node undefined", () => {
         expect(list.head()).toBe(1);
 
         list.pop();
 
-        expect(list.head()).toBeNull();
+        expect(list.head()).toBeUndefined();
       })
 
       test("decreases the size of the list by one", () => {
@@ -231,11 +231,11 @@ describe("LinkedList", () => {
       })
 
       test("it does not change the head node", () => {
-        expect(list.head()).toBeNull();
+        expect(list.head()).toBeUndefined();
 
         list.pop();
 
-        expect(list.head()).toBeNull();
+        expect(list.head()).toBeUndefined();
       })
     })
   })
