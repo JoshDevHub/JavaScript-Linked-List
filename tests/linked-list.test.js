@@ -2,7 +2,7 @@ import { describe, test, expect, beforeEach } from "@jest/globals";
 import LinkedList from "../src/linked-list";
 
 describe("LinkedList", () => {
-  describe("head()", () => {
+  describe("head", () => {
     test("returns `null` when there is no head node for the list", () => {
       const list = new LinkedList();
 
@@ -24,7 +24,7 @@ describe("LinkedList", () => {
     })
   })
 
-  describe("tail()", () => {
+  describe("tail", () => {
     test("returns the only value in a list with one element", () => {
       const list = new LinkedList();
       list.prepend(5);
@@ -43,7 +43,7 @@ describe("LinkedList", () => {
     })
   })
 
-  describe("append()", () => {
+  describe("append", () => {
     test("adds the given item to the end of the list", () => {
       const list = LinkedList.fromValues(1, 2, 3, 4, 5);
       expect(list.tail()).toBe(5);
@@ -74,7 +74,7 @@ describe("LinkedList", () => {
     })
   })
 
-  describe("prepend()", () => {
+  describe("prepend", () => {
     test("adds the given item to the beginning of the list", () => {
       const list = LinkedList.fromValues(1, 2, 3, 4, 5);
       expect(list.head()).toBe(1);
@@ -105,7 +105,7 @@ describe("LinkedList", () => {
     })
   })
 
-  describe("size()", () => {
+  describe("size", () => {
     test("returns 0 for an empty list", () => {
       const list = new LinkedList();
       expect(list.size()).toBe(0);
@@ -124,7 +124,7 @@ describe("LinkedList", () => {
     })
   })
 
-  describe("at()", () => {
+  describe("at", () => {
     const list = LinkedList.fromValues(5, 10, 15, 20);
 
     test("returns the element at the given index", () => {
@@ -143,7 +143,7 @@ describe("LinkedList", () => {
     })
   })
 
-  describe("pop()", () => {
+  describe("pop", () => {
     describe("with a multi-element list", () => {
       let list = null;
       beforeEach(() => list = LinkedList.fromValues(1, 2, 3))
@@ -219,7 +219,7 @@ describe("LinkedList", () => {
     })
   })
 
-  describe("contains()", () => {
+  describe("contains", () => {
     const list = LinkedList.fromValues(1, 2, 3);
 
     test("returns true when the given value is in the list", () => {
@@ -249,7 +249,7 @@ describe("LinkedList", () => {
     })
   })
 
-  describe("toString()", () => {
+  describe("toString", () => {
     test("returns 'null' with an empty list", () => {
       const list = new LinkedList();
       expect(list.toString()).toBe("null");
@@ -261,7 +261,7 @@ describe("LinkedList", () => {
     })
   })
 
-  describe("insertAt()", () => {
+  describe("insertAt", () => {
     describe("with an index that isn't in the list", () => {
       test("raises a RangeError", () => {
         const list = new LinkedList();
@@ -349,7 +349,7 @@ describe("LinkedList", () => {
     })
   })
 
-  describe("removeAt()", () => {
+  describe("removeAt", () => {
     describe("removing from an index out of bounds", () => {
       test("raises a RangeError", () => {
         const list = new LinkedList();
