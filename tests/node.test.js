@@ -5,7 +5,7 @@ describe("Node", () => {
   describe("toString()", () => {
     test("returns the node's value as a string", () => {
       const node = new Node(5);
-      expect(node.toString()).toBe("5");
+      expect(node.toString()).toBe("( 5 ) ->");
     })
   })
 

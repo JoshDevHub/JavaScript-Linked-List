@@ -271,9 +271,9 @@ describe("LinkedList", () => {
   })
 
   describe("toString", () => {
-    test("returns 'null' with an empty list", () => {
+    test("returns an empty string with an empty list", () => {
       const list = new LinkedList();
-      expect(list.toString()).toBe("null");
+      expect(list.toString()).toBe("");
     })
 
     test("returns the valid string representation of the list with multiple items", () => {

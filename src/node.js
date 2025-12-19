@@ -5,7 +5,7 @@ export default class Node {
   }
 
   toString() {
-    return this.value.toString();
+    return `( ${this.value} ) ->`;
   }
 
   isEqual(other) {
