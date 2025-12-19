@@ -73,15 +73,21 @@ export default class LinkedList {
     return `${listString} null`;
   }
 
-  insertAt(index, value) {
+  insertAt(index, ...values) {
     if (index < 0 || index > this.size()) {
       throw new RangeError("Index value is outside the bounds of this object");
     }
 
-    if (index === 0) return this.prepend(value);
+    if (index === 0) {
+      values.reverse().forEach((val) => this.prepend(val));
+      return;
+    }
 
     const nodeBeforeIndex = this.#findNode((_, i) => i === index - 1);
-    nodeBeforeIndex.nextNode = new Node(value, nodeBeforeIndex.nextNode);
+    while (values.length > 0) {
+      const newNode = new Node(values.pop(), nodeBeforeIndex.nextNode);
+      nodeBeforeIndex.nextNode = newNode;
+    }
   }
 
   removeAt(index) {

@@ -368,6 +368,16 @@ describe("LinkedList", () => {
         expect(list.tail()).toBe(value);
       })
     })
+
+    describe("when provided with multiple values", () => {
+      const list = LinkedList.fromValues(1, 2, 3);
+
+      test("inserts them all to the list", () => {
+        list.insertAt(1, 10, 20, 30);
+
+        expect(list.toString()).toBe("( 1 ) -> ( 10 ) -> ( 20 ) -> ( 30 ) -> ( 2 ) -> ( 3 ) -> null");
+      })
+    })
   })
 
   describe("removeAt", () => {
