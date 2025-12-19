@@ -255,18 +255,18 @@ describe("LinkedList", () => {
     })
   })
 
-  describe("find()", () => {
+  describe("findIndex", () => {
     const list = LinkedList.fromValues(5, 10, 15, 20);
 
     test("returns the index of the element if it's in the list", () => {
-      expect(list.find(5)).toBe(0);
-      expect(list.find(10)).toBe(1);
-      expect(list.find(15)).toBe(2);
-      expect(list.find(20)).toBe(3);
+      expect(list.findIndex(5)).toBe(0);
+      expect(list.findIndex(10)).toBe(1);
+      expect(list.findIndex(15)).toBe(2);
+      expect(list.findIndex(20)).toBe(3);
     })
 
     test("returns -1 for an element that's not in the list", () => {
-      expect(list.find(100)).toBe(-1);
+      expect(list.findIndex(100)).toBe(-1);
     })
   })
 

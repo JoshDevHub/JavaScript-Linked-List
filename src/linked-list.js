@@ -55,7 +55,7 @@ export default class LinkedList {
     return this.#genNodes().some((node) => node.value === value);
   }
 
-  find(value) {
+  findIndex(value) {
     let foundIdx = -1;
     this.#findNode((node, i) => {
       if (node.value === value) {
