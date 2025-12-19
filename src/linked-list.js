@@ -73,7 +73,7 @@ export default class LinkedList {
     return `${listString} null`;
   }
 
-  insertAt(value, index) {
+  insertAt(index, value) {
     if (index < 0 || index > this.size()) {
       throw new RangeError("Index value is outside the bounds of this object");
     }

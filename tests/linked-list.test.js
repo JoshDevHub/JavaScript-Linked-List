@@ -287,8 +287,8 @@ describe("LinkedList", () => {
       test("raises a RangeError", () => {
         const list = new LinkedList();
 
-        expect(() => list.insertAt(100, 1)).toThrow(RangeError);
-        expect(() => list.insertAt(100, -1)).toThrow(RangeError);
+        expect(() => list.insertAt(1, 100)).toThrow(RangeError);
+        expect(() => list.insertAt(-1, 100)).toThrow(RangeError);
       })
     })
 
@@ -297,7 +297,7 @@ describe("LinkedList", () => {
         const list = new LinkedList();
         expect(list.size()).toBe(0);
 
-        list.insertAt(100, 0);
+        list.insertAt(0, 100);
 
         expect(list.head()).toBe(100);
         expect(list.tail()).toBe(100);
@@ -315,7 +315,7 @@ describe("LinkedList", () => {
       test("increases the size of the list", () => {
         expect(list.size()).toBe(4);
 
-        list.insertAt(value, writeIndex);
+        list.insertAt(writeIndex, value);
 
         expect(list.size()).toBe(5);
       })
@@ -323,7 +323,7 @@ describe("LinkedList", () => {
       test("writes the given value to the given index", () => {
         expect(list.at(2)).not.toBe(value);
 
-        list.insertAt(value, writeIndex);
+        list.insertAt(writeIndex, value);
 
         expect(list.at(2)).toBe(value);
       })
@@ -331,7 +331,7 @@ describe("LinkedList", () => {
       test("shifts the value at the previous index back", () => {
         expect(list.at(3)).not.toBe(3);
 
-        list.insertAt(value, writeIndex);
+        list.insertAt(writeIndex, value);
 
         expect(list.at(3)).toBe(3);
       })
@@ -347,7 +347,7 @@ describe("LinkedList", () => {
       test("increases the size of the list", () => {
         expect(list.size()).toBe(4);
 
-        list.insertAt(value, writeIndex);
+        list.insertAt(writeIndex, value);
 
         expect(list.size()).toBe(5);
       })
@@ -355,7 +355,7 @@ describe("LinkedList", () => {
       test("writes the given value to the given index", () => {
         expect(list.at(4)).not.toBe(value);
 
-        list.insertAt(value, writeIndex);
+        list.insertAt(writeIndex, value);
 
         expect(list.at(4)).toBe(value);
       })
@@ -363,7 +363,7 @@ describe("LinkedList", () => {
       test("the new value is now the tail node", () => {
         expect(list.tail()).not.toBe(value);
 
-        list.insertAt(value, writeIndex);
+        list.insertAt(writeIndex, value);
 
         expect(list.tail()).toBe(value);
       })
