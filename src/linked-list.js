@@ -1,8 +1,6 @@
 import Node from "./node.js";
 
 export default class LinkedList {
-  #head;
-
   static fromValues(...values) {
     const list = new LinkedList();
     values.reverse().forEach((value) => list.prepend(value));
@@ -10,6 +8,7 @@ export default class LinkedList {
     return list;
   }
 
+  #head;
   constructor() {
     this.#head = null;
   }
