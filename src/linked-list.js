@@ -13,6 +13,10 @@ export default class LinkedList {
     this.#head = null;
   }
 
+  toArray() {
+    return this.#genNodes().map((node) => node.value).toArray();
+  }
+
   head() {
     return this.#head?.value;
   }

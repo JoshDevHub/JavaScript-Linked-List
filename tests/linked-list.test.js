@@ -1,4 +1,4 @@
-import { describe, test, expect, beforeEach } from "@jest/globals";
+import { describe, test, expect } from "@jest/globals";
 import LinkedList from "../src/linked-list";
 
 describe("LinkedList", () => {
@@ -6,20 +6,28 @@ describe("LinkedList", () => {
     test("returns a new list formed from the given values in order", () => {
       const list = LinkedList.fromValues(5, 10, 15, 20);
 
-      expect(list.size()).toBe(4);
-
-      expect(list.at(0)).toBe(5);
-      expect(list.at(1)).toBe(10);
-      expect(list.at(2)).toBe(15);
-      expect(list.at(3)).toBe(20);
-      expect(list.at(4)).toBeUndefined();
+      expect(list.toArray()).toEqual([5, 10, 15, 20]);
     })
 
     test("can return an empty list", () => {
       const emptyList = LinkedList.fromValues();
 
-      expect(emptyList.size()).toBe(0);
-      expect(emptyList.at(0)).toBeUndefined();
+      expect(emptyList.toArray()).toEqual([]);
+    })
+  })
+
+  describe("toArray", () => {
+    test("returns an empty array with an empty list", () => {
+      expect(new LinkedList().toArray()).toEqual([])
+    })
+
+    test("returns an array with [1, 2, 3] when used on a list with those elements", () => {
+      const list = new LinkedList();
+      list.append(1);
+      list.append(2);
+      list.append(3);
+
+      expect(list.toArray()).toEqual([1, 2, 3])
     })
   })
 
@@ -67,62 +75,34 @@ describe("LinkedList", () => {
   describe("append", () => {
     test("adds the given item to the end of the list", () => {
       const list = LinkedList.fromValues(1, 2, 3, 4, 5);
-      expect(list.tail()).toBe(5);
-
       list.append(10);
 
-      expect(list.tail()).toBe(10);
+      expect(list.toArray()).toEqual([1, 2, 3, 4, 5, 10]);
     })
 
-    test("with an empty list, it adds a new item at the beginning and end of the list", () => {
+    test("with an empty list, it adds a new item as the only value in the list", () => {
       const list = new LinkedList();
-      expect(list.head()).toBeUndefined();
-      expect(list.tail()).toBeUndefined();
-
       list.append(1);
 
-      expect(list.head()).toBe(1);
-      expect(list.tail()).toBe(1);
-    })
-
-    test("increases the size of the list by one", () => {
-      const list = new LinkedList();
-      expect(list.size()).toBe(0);
-
-      list.append(10);
-
-      expect(list.size()).toBe(1);
+      expect(list.toArray()).toEqual([1]);
     })
   })
 
   describe("prepend", () => {
     test("adds the given item to the beginning of the list", () => {
       const list = LinkedList.fromValues(1, 2, 3, 4, 5);
-      expect(list.head()).toBe(1);
 
       list.prepend(0);
 
-      expect(list.head()).toBe(0);
+      expect(list.toArray()).toEqual([0, 1, 2, 3, 4, 5]);
     })
 
     test("with an empty list, it adds a new item to the end and beginning of the list", () => {
       const list = new LinkedList();
-      expect(list.tail()).toBeUndefined();
-      expect(list.tail()).toBeUndefined();
 
       list.prepend(1);
 
-      expect(list.tail()).toBe(1);
-      expect(list.tail()).toBe(1);
-    })
-
-    test("increases the size of the list by one", () => {
-      const list = new LinkedList();
-      expect(list.size()).toBe(0);
-
-      list.prepend(1)
-
-      expect(list.size()).toBe(1);
+      expect(list.toArray()).toEqual([1]);
     })
   })
 
@@ -166,76 +146,47 @@ describe("LinkedList", () => {
 
   describe("pop", () => {
     describe("with a multi-element list", () => {
-      let list = null;
-      beforeEach(() => list = LinkedList.fromValues(1, 2, 3))
-
       test("returns the first value from a list with items in it", () => {
+        const list = LinkedList.fromValues(1, 2, 3);
+
         expect(list.pop()).toBe(1);
       })
 
-      test("changes the head node from the 0th element to the 1st element", () => {
-        expect(list.head()).toBe(1);
-
+      test("removes the first node from the list", () => {
+        const list = LinkedList.fromValues(1, 2, 3);
         list.pop();
 
-        expect(list.head()).toBe(2);
-      })
-
-      test("decreases the size of the list by one", () => {
-        expect(list.size()).toBe(3);
-
-        list.pop();
-
-        expect(list.size()).toBe(2);
+        expect(list.toArray()).toEqual([2, 3])
       })
     })
 
     describe("with one element in the list", () => {
-      let list = null;
-      beforeEach(() => list = LinkedList.fromValues(1))
-
       test("returns the value in the list", () => {
+        const list = LinkedList.fromValues(1);
         expect(list.pop()).toBe(1);
       })
 
       test("makes the head node undefined", () => {
-        expect(list.head()).toBe(1);
+        const list = LinkedList.fromValues(1);
 
         list.pop();
 
-        expect(list.head()).toBeUndefined();
-      })
-
-      test("decreases the size of the list by one", () => {
-        expect(list.size()).toBe(1);
-
-        list.pop();
-
-        expect(list.size()).toBe(0);
+        expect(list.toArray()).toEqual([]);
       })
     })
 
     describe("with an empty list", () => {
-      const list = new LinkedList();
-
       test("returns undefined", () => {
+        const list = new LinkedList();
         expect(list.pop()).toBeUndefined();
       })
 
-      test("it does not change the size of the list", () => {
-        expect(list.size()).toBe(0);
+      test("it does not change the list", () => {
+        const list = new LinkedList();
 
         list.pop();
 
-        expect(list.size()).toBe(0);
-      })
-
-      test("it does not change the head node", () => {
-        expect(list.head()).toBeUndefined();
-
-        list.pop();
-
-        expect(list.head()).toBeUndefined();
+        expect(list.toArray()).toEqual([]);
       })
     })
   })
@@ -283,153 +234,75 @@ describe("LinkedList", () => {
   })
 
   describe("insertAt", () => {
-    describe("with an index that isn't in the list", () => {
-      test("raises a RangeError", () => {
-        const list = new LinkedList();
+    test("throws a `RangeError` when used with an out of bounds index", () => {
+      const list = new LinkedList();
 
-        expect(() => list.insertAt(1, 100)).toThrow(RangeError);
-        expect(() => list.insertAt(-1, 100)).toThrow(RangeError);
-      })
+      expect(() => list.insertAt(1, 100)).toThrow(RangeError);
+      expect(() => list.insertAt(-1, 100)).toThrow(RangeError);
     })
 
-    describe("to the index at the beginning of the list", () => {
-      test("it inserts the item", () => {
-        const list = new LinkedList();
-        expect(list.size()).toBe(0);
+    test("can write the given value to the index at the front of the list", () => {
+      const list = new LinkedList();
 
-        list.insertAt(0, 100);
+      list.insertAt(0, 100);
 
-        expect(list.head()).toBe(100);
-        expect(list.tail()).toBe(100);
-        expect(list.size()).toBe(1);
-      })
+      expect(list.toArray()).toEqual([100])
     })
 
-    describe("to the index in the middle of the list", () => {
-      let list = {}
-      beforeEach(() => list = LinkedList.fromValues(1, 2, 3, 4));
+    test("can write the given value to an index in the middle of the list", () => {
+      const list = LinkedList.fromValues(1, 2, 3, 4);
 
-      const writeIndex = 2;
-      const value = 100
+      list.insertAt(2, 100)
 
-      test("increases the size of the list", () => {
-        expect(list.size()).toBe(4);
-
-        list.insertAt(writeIndex, value);
-
-        expect(list.size()).toBe(5);
-      })
-
-      test("writes the given value to the given index", () => {
-        expect(list.at(2)).not.toBe(value);
-
-        list.insertAt(writeIndex, value);
-
-        expect(list.at(2)).toBe(value);
-      })
-
-      test("shifts the value at the previous index back", () => {
-        expect(list.at(3)).not.toBe(3);
-
-        list.insertAt(writeIndex, value);
-
-        expect(list.at(3)).toBe(3);
-      })
+      expect(list.toArray()).toEqual([1, 2, 100, 3, 4]);
     })
 
-    describe("to the index at the end of the list", () => {
-      let list = {}
-      beforeEach(() => list = LinkedList.fromValues(1, 2, 3, 4));
+    test("writes the given value to an index at the end of the list", () => {
+      const list = LinkedList.fromValues(1, 2, 3, 4);
 
-      const writeIndex = 4;
-      const value = 100
+      list.insertAt(4, 100);
 
-      test("increases the size of the list", () => {
-        expect(list.size()).toBe(4);
-
-        list.insertAt(writeIndex, value);
-
-        expect(list.size()).toBe(5);
-      })
-
-      test("writes the given value to the given index", () => {
-        expect(list.at(4)).not.toBe(value);
-
-        list.insertAt(writeIndex, value);
-
-        expect(list.at(4)).toBe(value);
-      })
-
-      test("the new value is now the tail node", () => {
-        expect(list.tail()).not.toBe(value);
-
-        list.insertAt(writeIndex, value);
-
-        expect(list.tail()).toBe(value);
-      })
+      expect(list.toArray()).toEqual([1, 2, 3, 4, 100]);
     })
 
-    describe("when provided with multiple values", () => {
+    test("inserts them all to the list", () => {
       const list = LinkedList.fromValues(1, 2, 3);
+      list.insertAt(1, 10, 20, 30);
 
-      test("inserts them all to the list", () => {
-        list.insertAt(1, 10, 20, 30);
-
-        expect(list.toString()).toBe("( 1 ) -> ( 10 ) -> ( 20 ) -> ( 30 ) -> ( 2 ) -> ( 3 ) -> null");
-      })
+      expect(list.toString()).toBe("( 1 ) -> ( 10 ) -> ( 20 ) -> ( 30 ) -> ( 2 ) -> ( 3 ) -> null");
     })
   })
 
   describe("removeAt", () => {
-    describe("removing from an index out of bounds", () => {
-      test("raises a RangeError", () => {
-        const list = new LinkedList();
+    test("throws a `RangeError` when used with an out of bounds index", () => {
+      const list = new LinkedList();
 
-        expect(() => list.removeAt(0)).toThrow(RangeError);
-        expect(() => list.removeAt(-1)).toThrow(RangeError);
-      })
+      expect(() => list.removeAt(0)).toThrow(RangeError);
+      expect(() => list.removeAt(-1)).toThrow(RangeError);
     })
 
-    describe("removing at the 0th index", () => {
-      let list = {};
-      beforeEach(() => list = LinkedList.fromValues(1, 2, 3));
+    test("can remove the item at the 0th index", () => {
+      const list = LinkedList.fromValues(1, 2, 3);
 
-      test("it reduces the size of the list by one", () => {
-        expect(list.size()).toBe(3)
+      list.removeAt(0);
 
-        list.removeAt(0);
-
-        expect(list.size()).toBe(2)
-      })
-
-      test("it shifts the remaining items forward in the list", () => {
-        expect(list.at(0)).toBe(1);
-
-        list.removeAt(0);
-
-        expect(list.at(0)).toBe(2);
-      })
+      expect(list.toArray()).toEqual([2, 3])
     })
 
-    describe("removing from the middle of the list", () => {
-      let list = {};
-      beforeEach(() => list = LinkedList.fromValues(1, 2, 3));
+    test("can remove an item at an index in the middle of the list", () => {
+      const list = LinkedList.fromValues(1, 2, 3);
 
-      test("it reduces the size of the list by one", () => {
-        expect(list.size()).toBe(3)
+      list.removeAt(1);
 
-        list.removeAt(1);
+      expect(list.toArray()).toEqual([1, 3]);
+    })
 
-        expect(list.size()).toBe(2)
-      })
+    test("can remove the final item in the list", () => {
+      const list = LinkedList.fromValues(1, 2, 3);
 
-      test("it shifts the remaining items forward in the list", () => {
-        expect(list.at(1)).toBe(2);
+      list.removeAt(2);
 
-        list.removeAt(1);
-
-        expect(list.at(1)).toBe(3);
-      })
+      expect(list.toArray()).toEqual([1, 2]);
     })
   })
 })
