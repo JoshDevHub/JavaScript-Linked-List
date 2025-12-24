@@ -43,7 +43,7 @@ export default class LinkedList {
   }
 
   at(index) {
-    return this.#findNode((_, i) => index === i)?.value;
+    return this.#findNodeByIndex(index)?.value;
   }
 
   pop() {
@@ -59,14 +59,13 @@ export default class LinkedList {
   }
 
   findIndex(value) {
-    let foundIdx = -1;
-    this.#findNode((node, i) => {
-      if (node.value === value) {
-        foundIdx = i;
-        return true;
-      }
-    })
-    return foundIdx;
+    let index = 0;
+    for (const node of this.#genNodes()) {
+      if (node.value === value) return index;
+      index += 1;
+    }
+
+    return -1;
   }
 
   toString() {
@@ -86,7 +85,7 @@ export default class LinkedList {
       return;
     }
 
-    const nodeBeforeIndex = this.#findNode((_, i) => i === index - 1);
+    const nodeBeforeIndex = this.#findNodeByIndex(index - 1);
     while (values.length > 0) {
       const newNode = new Node(values.pop(), nodeBeforeIndex.nextNode);
       nodeBeforeIndex.nextNode = newNode;
@@ -103,8 +102,12 @@ export default class LinkedList {
       return;
     }
 
-    const nodeBeforeIndex = this.#findNode((_, i) => i === index - 1);
+    const nodeBeforeIndex = this.#findNodeByIndex(index - 1);
     nodeBeforeIndex.nextNode = nodeBeforeIndex.secondSuccessor();
+  }
+
+  #findNodeByIndex(index) {
+    return this.#findNode((_, i) => index === i);
   }
 
   #tailNode() {
